@@ -669,19 +669,32 @@
             }
 
             .person-row {
-                flex-direction: column;
-                justify-content: center;
+                flex-direction: row;
+                justify-content: space-between;
                 align-items: center;
-                gap: 12px;
+                gap: 15px;
+            }
+
+            .person-row.mappala {
+                flex-direction: row;
+            }
+
+            .person-row.ponnu {
+                flex-direction: row-reverse;
             }
 
             .person-img {
-                width: 150px;
+                width: 120px;
                 height: auto;
             }
 
+            .person-details {
+                flex: 1;
+                text-align: center;
+            }
+
             .person-details h3 {
-                font-size: 1.4rem;
+                font-size: 1.2rem;
             }
 
             .person-details p {
@@ -794,58 +807,110 @@
     .gallery-grid {
         position: relative;
         z-index: 1;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-        max-width: 1000px;
+        column-count: 3;
+        column-gap: 20px;
+        max-width: 1100px;
         margin: 0 auto;
-        padding: 0 10px;
+        padding: 0 20px;
     }
 
-    .gallery-item {
+    .gallery-custom {
         position: relative;
-        padding: 4px;
-        border-radius: 10px;
-        background: linear-gradient(135deg, #D4A843, #8B6914, #D4A843, #F5E6D3);
-        background-size: 300% 300%;
-        animation: gradientBorder 4s ease infinite;
+        z-index: 1;
+        display: flex;
+        gap: 20px;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .gallery-left {
+        flex: 1;
+        background: #fff;
+        border: 6px solid #fff;
+        border-radius: 4px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.1);
         cursor: pointer;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         overflow: hidden;
-        aspect-ratio: 1 / 1;
+        position: relative;
     }
 
-    .gallery-item:hover {
-        transform: scale(1.03);
-        box-shadow: 0 0 20px rgba(212, 168, 67, 0.6);
+    .gallery-left::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 2px solid #D4A843;
+        border-radius: 2px;
+        z-index: 2;
+        pointer-events: none;
     }
 
-    .gallery-item:nth-child(1) { animation-delay: 0s; }
-    .gallery-item:nth-child(2) { animation-delay: 0.5s; }
-    .gallery-item:nth-child(3) { animation-delay: 1s; }
-    .gallery-item:nth-child(4) { animation-delay: 1.5s; }
-    .gallery-item:nth-child(5) { animation-delay: 2s; }
-    .gallery-item:nth-child(6) { animation-delay: 2.5s; }
-    .gallery-item:nth-child(7) { animation-delay: 3s; }
-    .gallery-item:nth-child(8) { animation-delay: 3.5s; }
-    .gallery-item:nth-child(9) { animation-delay: 4s; }
-
-    @keyframes gradientBorder {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+    .gallery-left:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(212, 168, 67, 0.3);
     }
 
-    .gallery-item img {
+    .gallery-left img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 8px;
         display: block;
         transition: transform 0.3s ease;
     }
 
-    .gallery-item:hover img {
+    .gallery-left:hover img {
+        transform: scale(1.05);
+    }
+
+    .gallery-right {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .gallery-right-item {
+        background: #fff;
+        border: 4px solid #fff;
+        border-radius: 4px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .gallery-right-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 2px solid #D4A843;
+        border-radius: 2px;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .gallery-right-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(212, 168, 67, 0.3);
+    }
+
+    .gallery-right-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-right-item:hover img {
         transform: scale(1.05);
     }
 
@@ -923,13 +988,22 @@
             padding: 40px 15px;
         }
 
-        .gallery-grid {
-            grid-template-columns: repeat(3, 1fr);
+        .gallery-custom {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .gallery-left {
+            border-width: 4px;
+        }
+
+        .gallery-right {
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
         }
 
-        .gallery-item {
-            aspect-ratio: 1 / 1 !important;
+        .gallery-right-item {
+            border-width: 3px;
         }
 
         .gallery-title h2 {
@@ -946,13 +1020,22 @@
             padding: 30px 12px;
         }
 
-        .gallery-grid {
+        .gallery-custom {
+            gap: 12px;
+        }
+
+        .gallery-left {
+            border-width: 4px;
+        }
+
+        .gallery-right {
             grid-template-columns: repeat(2, 1fr);
             gap: 8px;
         }
 
-        .gallery-item {
-            aspect-ratio: 1 / 1 !important;
+        .gallery-right-item {
+            border-width: 3px;
+        }
         }
 
         .gallery-title h2 {
@@ -973,7 +1056,7 @@
             top: 15px;
             right: 20px;
         }
-    }
+    
 
     .events-section {
         width: 100vw;
@@ -2162,6 +2245,7 @@
                 padding: 12px 8px;
                 border-width: 3px;
                 border-radius: 30px;
+                z-index: 4;
             }
 
             .date-box h2 {
@@ -2353,31 +2437,40 @@
             }
 
             .greeting {
-                bottom: 45%;
+                bottom: 61%;
                 width: 94%;
             }
 
             .greeting h2,
             .greeting .greeting-title {
                 font-size: 1rem;
-                color: #D4A843;
-                text-shadow: 0 0 12px rgba(212, 168, 67, 0.7);
+                background: linear-gradient(135deg, #8B0000, #471e1e);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                text-shadow: none;
             }
 
             .greeting h1,
             .greeting .greeting-names {
                 font-size: 2.2rem;
                 line-height: 1.2;
-                color: #D4A843;
-                text-shadow: 0 0 14px rgba(212, 168, 67, 0.75);
+                background: linear-gradient(135deg, #8B0000, #471e1e);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                text-shadow: none;
             }
 
             .greeting p,
             .greeting .greeting-subtitle {
                 font-size: 0.9rem;
                 line-height: 1.4;
-                color: #D4A843;
-                text-shadow: 0 0 10px rgba(212, 168, 67, 0.6);
+                background: linear-gradient(135deg, #8B0000, #471e1e);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                text-shadow: none;
             }
         }
 
@@ -3399,9 +3492,9 @@
                     <h3>K.Vinothkumar</h3>
                     <p>D.CSE., B.Sc.</p>
                     <p>Vreon Tech India Pvt. Ltd., Chennai</p>
-                    <p class="person-family">Grandson of Late M. Dharmalingam Achariyar &amp; Chinnammal through their son.</p>
+                    <p class="person-family">Grandson of Late M. Tharmalingam Achariyar &amp; Chinnammal through their son.</p>
                     <p class="person-family">Grandson of Late K. Subramaniam Achariyar &amp; Saraswathi through their daughter.</p>
-                    <p class="person-family">Son of Late K. Kasinathan Achariyar &amp; Ramu Ammal.</p>
+                    <p class="person-family">Son of Late T. Kasinathan Achariyar &amp; Ramu Ammal.</p>
                 </div>
                 <img src="Assect/mappala.png" alt="Mappala" class="person-img scroll-hidden slide-left">
             </div>
@@ -3424,33 +3517,47 @@
             <h2>Gallery<span class="golden-divider"><span class="gld-leaf gld-leaf-l"></span><span class="gld-end gld-end-l"></span><span class="gld-line"></span><span class="gld-crown"></span><span class="gld-line"></span><span class="gld-end gld-end-r"></span><span class="gld-leaf gld-leaf-r"></span></span></h2>
             <p>Memorable Moments</p>
         </div>
-        <div class="gallery-grid">
-            <div class="gallery-item scroll-hidden zoom-in" onclick="openLightbox(0)">
+        <div class="gallery-custom">
+            <div class="gallery-left scroll-hidden zoom-in" onclick="openLightbox(0)">
                 <img src="Assect/card1.webp" alt="Card 1">
             </div>
-            <div class="gallery-item scroll-hidden zoom-in" onclick="openLightbox(1)">
-                <img src="Assect/card2.webp" alt="Card 2">
-            </div>
-            <div class="gallery-item scroll-hidden zoom-in" onclick="openLightbox(2)">
-                <img src="Assect/card3.webp" alt="Card 3">
-            </div>
-            <div class="gallery-item scroll-hidden zoom-in" onclick="openLightbox(3)">
-                <img src="Assect/card4.webp" alt="Card 4">
-            </div>
-            <div class="gallery-item scroll-hidden zoom-in" onclick="openLightbox(4)">
-                <img src="Assect/card5.webp" alt="Card 5">
-            </div>
-            <div class="gallery-item scroll-hidden zoom-in" onclick="openLightbox(5)">
-                <img src="Assect/card6.webp" alt="Card 6">
-            </div>
-            <div class="gallery-item scroll-hidden zoom-in" onclick="openLightbox(6)">
-                <img src="Assect/card7.webp" alt="Card 7">
-            </div>
-            <div class="gallery-item scroll-hidden zoom-in" onclick="openLightbox(7)">
-                <img src="Assect/card8.webp" alt="Card 8">
-            </div>
-            <div class="gallery-item scroll-hidden zoom-in" onclick="openLightbox(8)">
-                <img src="Assect/card9.webp" alt="Card 9">
+            <div class="gallery-right">
+                <div class="gallery-right-item scroll-hidden zoom-in" onclick="openLightbox(1)">
+                    <img src="Assect/card2.webp" alt="Card 2">
+                </div>
+                <div class="gallery-right-item scroll-hidden zoom-in" onclick="openLightbox(2)">
+                    <img src="Assect/card3.webp" alt="Card 3">
+                </div>
+                <div class="gallery-right-item scroll-hidden zoom-in" onclick="openLightbox(3)">
+                    <img src="Assect/card4.webp" alt="Card 4">
+                </div>
+                <div class="gallery-right-item scroll-hidden zoom-in" onclick="openLightbox(4)">
+                    <img src="Assect/card5.webp" alt="Card 5">
+                </div>
+                <div class="gallery-right-item scroll-hidden zoom-in" onclick="openLightbox(5)">
+                    <img src="Assect/card6.webp" alt="Card 6">
+                </div>
+                <div class="gallery-right-item scroll-hidden zoom-in" onclick="openLightbox(6)">
+                    <img src="Assect/card7.webp" alt="Card 7">
+                </div>
+                <div class="gallery-right-item scroll-hidden zoom-in" onclick="openLightbox(7)">
+                    <img src="Assect/card8.webp" alt="Card 8">
+                </div>
+                <div class="gallery-right-item scroll-hidden zoom-in" onclick="openLightbox(8)">
+                    <img src="Assect/card9.webp" alt="Card 9">
+                </div>
+                <div class="gallery-right-item scroll-hidden zoom-in" onclick="openLightbox(9)">
+                    <img src="Assect/card10.webp" alt="Card 10">
+                </div>
+                <div class="gallery-right-item scroll-hidden zoom-in" onclick="openLightbox(10)">
+                    <img src="Assect/card11.webp" alt="Card 11">
+                </div>
+                <div class="gallery-right-item scroll-hidden zoom-in" onclick="openLightbox(11)">
+                    <img src="Assect/card12.webp" alt="Card 12">
+                </div>
+                <div class="gallery-right-item scroll-hidden zoom-in" onclick="openLightbox(12)">
+                    <img src="Assect/card13.webp" alt="Card 13">
+                </div>
             </div>
         </div>
     </section>
@@ -3469,16 +3576,10 @@
         </div>
         <div class="events-grid">
             <div class="event-card scroll-hidden fade-up">
-                <div class="event-icon">&#128141;</div>
-                <h3>Engagement</h3>
-                <div class="event-time">14 Nov 2026 - 10:00 AM</div>
-                <p>Ring ceremony with family & friends</p>
-            </div>
-            <div class="event-card scroll-hidden fade-up">
-                <div class="event-icon">&#127881;</div>
-                <h3>Mehendi</h3>
-                <div class="event-time">15 Nov 2026 - 04:00 PM</div>
-                <p>Henna ceremony for the bride</p>
+                <div class="event-icon">&#127867;</div>
+                <h3>Reception</h3>
+                <div class="event-time">15 Nov 2026 - 06:00 PM</div>
+                <p>Grand reception dinner</p>
             </div>
             <div class="event-card scroll-hidden fade-up">
                 <div class="event-icon">&#128149;</div>
@@ -3487,11 +3588,19 @@
                 <p>Muhurtham 6:00 AM - 7:30 AM</p>
             </div>
             <div class="event-card scroll-hidden fade-up">
+                <div class="event-icon">&#128141;</div>
+                <h3>Nagavalli Muhurtham</h3>
+                <div class="event-time">16 Nov 2026 - 10:30 AM</div>
+                <p>Muhurtham 10:30 AM - 12:00 PM</p>
+            </div>
+            <div class="event-card scroll-hidden fade-up">
                 <div class="event-icon">&#127867;</div>
                 <h3>Reception</h3>
-                <div class="event-time">16 Nov 2026 - 07:00 PM</div>
-                <p>Grand reception dinner</p>
+                <div class="event-time">20 Nov 2026 - 06:30 PM</div>
+                <p>Ram Chandra Party Hall, Thiruverkadu</p>
             </div>
+            
+            
         </div>
     </section>
 
@@ -3528,10 +3637,11 @@
         <div class="location-kozham-right"></div>
         <div class="location-title scroll-hidden fade-up">
             <h2>Venue Location<span class="golden-divider"><span class="gld-leaf gld-leaf-l"></span><span class="gld-end gld-end-l"></span><span class="gld-line"></span><span class="gld-crown"></span><span class="gld-line"></span><span class="gld-end gld-end-r"></span><span class="gld-leaf gld-leaf-r"></span></span></h2>
-            <p>Where Love Begins</p>
+            <p>Where Love Begins - Venues for Our Celebration</p>
         </div>
         <div class="location-container">
             <div class="venue-card scroll-hidden zoom-in">
+                <div class="venue-date-badge" style="background: linear-gradient(135deg, #D4A843, #8B6914); color: #fff; display: inline-block; padding: 8px 20px; border-radius: 25px; font-size: 0.9rem; font-weight: bold; letter-spacing: 1px; margin-bottom: 15px;">15 & 16 Nov 2026</div>
                 <div class="venue-icon">&#127983;</div>
                 <h3>Chakravarthy Lalitha A/C Mahal</h3>
                 <p class="venue-address">Chennai–Trichy Main Road, Ulundurpet – 606107<br>Tamil Nadu, India</p>
@@ -3542,6 +3652,30 @@
             </div>
             <div style="text-align: center;">
                 <a href="https://www.google.com/maps/search/Chakravarthy+Lalitha+Mahal+Ulundurpet+Tamil+Nadu" target="_blank" class="direction-btn">
+                    <span>&#128205;</span> Get Directions
+                </a>
+            </div>
+        </div>
+
+        <div class="location-divider scroll-hidden fade-up" style="text-align: center; margin: 40px 0; position: relative; z-index: 1;">
+            <span style="font-size: 1.5rem; color: #D4A843;">&#10022;</span>
+            <span style="font-size: 1rem; color: #471e1e; margin: 0 15px; font-family: 'Georgia', serif; letter-spacing: 2px;">AND</span>
+            <span style="font-size: 1.5rem; color: #D4A843;">&#10022;</span>
+        </div>
+
+        <div class="location-container">
+            <div class="venue-card scroll-hidden zoom-in">
+                <div class="venue-date-badge" style="background: linear-gradient(135deg, #D4A843, #8B6914); color: #fff; display: inline-block; padding: 8px 20px; border-radius: 25px; font-size: 0.9rem; font-weight: bold; letter-spacing: 1px; margin-bottom: 15px;">20 Nov 2026</div>
+                <div class="venue-icon">&#127983;</div>
+                <h3>Ram Chandra Party Hall</h3>
+                <p class="venue-address">Sannadhi St, near Indian Bank back side,<br>Karumariamman Nagar, MGR Nagar,<br>Thiruverkadu, Chennai, Tamil Nadu 600077</p>
+                <p class="venue-phone">&#128222; Contact for directions</p>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps?q=Ram+Chandra+Party+Hall+Thiruverkadu+Chennai+Tamil+Nadu+600077&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div style="text-align: center;">
+                <a href="https://www.google.com/maps/search/Ram+Chandra+Party+Hall+Thiruverkadu+Chennai+Tamil+Nadu+600077" target="_blank" class="direction-btn">
                     <span>&#128205;</span> Get Directions
                 </a>
             </div>
@@ -3724,7 +3858,11 @@
             'Assect/card6.webp',
             'Assect/card7.webp',
             'Assect/card8.webp',
-            'Assect/card9.webp'
+            'Assect/card9.webp',
+            'Assect/card10.webp',
+            'Assect/card11.webp',
+            'Assect/card12.webp',
+            'Assect/card13.webp'
         ];
         let currentIndex = 0;
 
