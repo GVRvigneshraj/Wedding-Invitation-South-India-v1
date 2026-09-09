@@ -1018,6 +1018,28 @@
         right: 10px;
     }
 
+    @media (min-width: 769px) {
+        .gallery-custom {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .gallery-left {
+            width: 100%;
+            aspect-ratio: 3 / 2;
+        }
+
+        .gallery-right {
+            width: 100%;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .gallery-right-item {
+            aspect-ratio: 3 / 4;
+        }
+    }
+
     @media (max-width: 768px) {
         .gallery-section {
             padding: 40px 15px;
@@ -2656,7 +2678,7 @@
         .footer-message {
             position: relative;
             z-index: 3;
-            text-align: left;
+            text-align: center;
             animation: fadeInUp 1.5s ease forwards;
             padding: 35px 30px;
             background: linear-gradient(135deg, rgba(71, 30, 30, 0.9), rgba(139, 0, 0, 0.85));
