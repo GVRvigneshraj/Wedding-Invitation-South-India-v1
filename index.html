@@ -2512,7 +2512,7 @@
 
             .greeting h2,
             .greeting .greeting-title {
-                font-size: 1rem;
+                font-size: 0.85rem;
                 background: linear-gradient(135deg, #8B0000, #471e1e);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
@@ -2522,7 +2522,7 @@
 
             .greeting h1,
             .greeting .greeting-names {
-                font-size: 2.2rem;
+                font-size: 1.8rem;
                 line-height: 1.2;
                 background: linear-gradient(135deg, #8B0000, #471e1e);
                 -webkit-background-clip: text;
@@ -2533,7 +2533,7 @@
 
             .greeting p,
             .greeting .greeting-subtitle {
-                font-size: 0.9rem;
+                font-size: 0.75rem;
                 line-height: 1.4;
                 background: linear-gradient(135deg, #8B0000, #471e1e);
                 -webkit-background-clip: text;
@@ -2689,6 +2689,18 @@
             font-style: italic;
             letter-spacing: 2px;
             text-shadow: 1px 1px 6px rgba(245, 230, 211, 0.5);
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .footer-ampersand {
+            font-size: 1em;
+            color: inherit;
+            font-weight: normal;
+            font-style: normal;
+            display: inline;
         }
 
         .footer-message .footer-thanks {
@@ -3461,7 +3473,7 @@
         <div class="loading-content">
             <div class="loading-subtitle">You Are Invited</div>
             <div class="loading-title">Wedding Invitation</div>
-            <div class="loading-names">K.Vinothkumar &amp; R.Premasri</div>
+            <div class="loading-names">K.Vinothkumar <span class="footer-ampersand">&</span> R.Premasri</div>
             <div class="loading-paragraph">We joyfully invite you to celebrate the wedding of our beloved daughter and son as they unite in love and begin their beautiful journey together.</div>
             <div class="loading-date">16 NOV 2026</div>
             <button class="loading-play-btn" id="loadingPlayBtn">Open</button>
@@ -3471,7 +3483,7 @@
     <div class="header" id="header">
         <div class="header-left">
             <img src="Assect/logo.png" alt="Logo" class="header-logo">
-            <span class="header-name">K.Vinothkumar &amp; R.Premasri</span>
+            <span class="header-name">K.Vinothkumar <span class="footer-ampersand">&</span> R.Premasri</span>
         </div>
         <nav class="header-nav">
             <a href="#home" class="header-nav-link">Home</a>
@@ -3764,7 +3776,7 @@
             <div class="heart-corner br"></div>
             <h2>Welcome!</h2>
             <p>You are warmly invited to witness and bless the union of two beautiful souls as they begin their journey of love and togetherness.</p>
-            <div class="footer-names">K.Vinothkumar &amp; R.Premasri</div>
+            <div class="footer-names"><span>K.Vinothkumar</span><span class="footer-ampersand">&</span><span>R.Premasri</span></div>
             <div class="footer-thanks">We look forward to celebrating this special day with you!</div>
         </div>
     </section>
